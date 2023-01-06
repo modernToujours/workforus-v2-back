@@ -18,16 +18,13 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '11'
-        distribution: 'temurin'
-        
-    - name: Set the Environment variables
+        distribution: 'temurin'        
+    - name: Build with Gradle
+      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+      with:
+        arguments: build
       env:
         datasource_url: ${{ secrets.DATASOURCE_URL }}
         datasrouce_username: ${{ secrets.DATASOURCE_USERNAME }}
         datasource_password: ${{ secrets.DATASOURCE_PASSWORD }}
         jwt_secret_key: ${ secrets.JWT_SECRET_SOURCE }}
-        
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-      with:
-        arguments: build
