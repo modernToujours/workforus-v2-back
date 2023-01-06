@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:mariadb://${env.datasource_url}
+    username: ${env.datasource_username}
+    password: ${env.datasource_password}
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        default_batch_fetch_size: 1000
+    hibernate:
+      ddl-auto: create
+    generate-ddl: true
+#    defer-datasource-initialization: true
+
+#  sql:
+#    init:
+#      mode: always
+#      data-locations: classpath:sql/data.sql
+#      schema-locations: classpath:sql/schema.sql
+
+jwt:
+  secret:
+    key: ${env.jwt_secret_key}

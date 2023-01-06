@@ -31,7 +31,6 @@ public class JWTProvider {
     private String salt;
 
     private SecretKey secretKey;
-//    private PrivateKey secretKey;
 
     private final long exp = 1000L * 60 * 60;
 
