@@ -1,0 +1,18 @@
+### 1. 회원가입
+POST localhost:8080/register
+Content-Type: application/json
+
+{
+  "id": "test",
+  "name" : "test",
+  "password" : "test123!!"
+}
+
+### 2. 로그인
+POST localhost:8080/login
+Content-Type: application/json
+
+{
+  "id": "test",
+  "password": "test123!!"
+}
