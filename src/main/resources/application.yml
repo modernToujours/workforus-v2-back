@@ -3,9 +3,9 @@ spring:
     activate:
       on-profile: default
   datasource:
-    url: jdbc:mariadb://${env.datasource_url}
-    username: ${env.datasource_username}
-    password: ${env.datasource_password}
+    url: jdbc:mariadb://${datasource_url}
+    username: ${datasource_username}
+    password: ${datasource_password}
     driver-class-name: org.mariadb.jdbc.Driver
 
   jpa:

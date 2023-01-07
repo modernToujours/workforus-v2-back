@@ -26,13 +26,9 @@ jobs:
         datasource_username=${{ secrets.DATASOURCE_USERNAME }}
         datasource_password=${{ secrets.DATASOURCE_PASSWORD }}
         jwt_secret_key=${{ secrets.JWT_SECRET_KEY }}
-        echo "$datasource_url"
         echo "datasource_url=$datasource_url" >> $GITHUB_ENV
-        echo "$datasource_username"
         echo "datasource_username=$datasource_username" >> $GITHUB_ENV
-        echo "$datasource_password"
         echo "datasource_password=$datasource_password" >> $GITHUB_ENV
-        echo "$jwt_secret_key"
         echo "jwt_secret_key=$jwt_secret_key" >> $GITHUB_ENV
         
     - name: Build with Gradle
