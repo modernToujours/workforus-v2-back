@@ -67,6 +67,7 @@ jobs:
   deploy:
     name: deploy
     runs-on: ubuntu-latest
+    needs: docker
     steps:
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@v0.1.6
