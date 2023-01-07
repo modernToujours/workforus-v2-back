@@ -61,11 +61,9 @@ jobs:
       - name: Copy jar
         run: |
           cp build/libs/workforus.jar app.jar
-          ls
-          pwd
       - name: Docker Hub Sign-in
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Building Docker Image
         run: docker build -t ${{ secrets.DOCKER_REPO }}:latest .
       - name: Publish Docker Image
-        run: docker push $REPO
+        run: docker push ${{ secrets.DOCKER_REPO }}
