@@ -58,9 +58,10 @@ jobs:
         with:
           name: build-artifact
           path: build
-      - name: Set up environment variables
+      - name: Copy jar
         run: |
-          ls build/libs
+          cp build/libs/workforus.jar app.jar
+          ls
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
