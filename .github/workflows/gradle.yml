@@ -82,4 +82,4 @@ jobs:
           docker-compose down
           docker-compose pull
           docker-compose up -d
-          docker images prune -af
+          docker image prune -af
