@@ -62,6 +62,7 @@ jobs:
         run: |
           cp build/libs/workforus.jar app.jar
           ls
+          pwd
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
