@@ -63,3 +63,21 @@ jobs:
         run: docker build -t ${{ secrets.DOCKER_REPO }}:latest .
       - name: Publish Docker Image
         run: docker push ${{ secrets.DOCKER_REPO }}
+
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@v0.1.6
+      with:
+        host: ${{ secrets.SSH_ADDRESS }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
+          docker-compose stop
+          docker-compose rm -f
+          docker-compose down
+          docker-compose pull
+          docker-compose up
