@@ -28,9 +28,9 @@ jobs:
         jwt_secret_key=${{ secrets.JWT_SECRET_KEY }}
         echo "$datasource_url"
         echo "datasource_url=$datasource_url" >> $GITHUB_ENV
-        echo "$datasrouce_username"
+        echo "$datasource_username"
         echo "datasource_username=$datasource_username" >> $GITHUB_ENV
-        echo "$datasrouce_password"
+        echo "$datasource_password"
         echo "datasource_password=$datasource_password" >> $GITHUB_ENV
         echo "$jwt_secret_key"
         echo "jwt_secret_key=$jwt_secret_key" >> $GITHUB_ENV
