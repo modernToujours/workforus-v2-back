@@ -81,4 +81,5 @@ jobs:
           docker-compose rm -f
           docker-compose down
           docker-compose pull
-          docker-compose up
+          docker-compose up -d
+          docker images prune -a -f
