@@ -62,4 +62,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: ${{ secrets.DOCKER_REPO }}:latest,${{ secrets.DOCKER_REPO }}:${GITHUB_RUN_ID}
+          tags: ${{ secrets.DOCKER_REPO }}:latest
