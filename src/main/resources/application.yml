@@ -1,4 +1,7 @@
 spring:
+  config:
+    activate:
+      on-profile: default
   datasource:
     url: jdbc:mariadb://${env.datasource_url}
     username: ${env.datasource_username}
@@ -20,6 +23,33 @@ spring:
 #      mode: always
 #      data-locations: classpath:sql/data.sql
 #      schema-locations: classpath:sql/schema.sql
+
+jwt:
+  secret:
+    key: ${env.jwt_secret_key}
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: test
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database: h2
+    hibernate:
+      ddl-auto: create
+    generate-ddl: true
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MariaDB;
+    username: SA
+    password:
+    driver-class-name: org.h2.Driver
+  sql:
+    init:
+      mode: always
 
 jwt:
   secret:
