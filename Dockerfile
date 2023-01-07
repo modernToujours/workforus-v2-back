@@ -1,3 +1,5 @@
 FROM adoptopenjdk/openjdk11
-COPY ./app.jar app.jar
+CMD ["ls", "-al"]
+RUN pwd
+COPY build/app.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
