@@ -1,5 +1,5 @@
+
 FROM adoptopenjdk/openjdk11
-CMD ["ls", "-al"]
-RUN pwd
 COPY app.jar app.jar
+EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
