@@ -23,7 +23,7 @@ jobs:
     - name: Set up environment variables
       run: |
         datasource_url=${{ secrets.DATASOURCE_URL }}
-        datasrouce_username=${{ secrets.DATASOURCE_USERNAME }}
+        datasource_username=${{ secrets.DATASOURCE_USERNAME }}
         datasource_password=${{ secrets.DATASOURCE_PASSWORD }}
         jwt_secret_key=${{ secrets.JWT_SECRET_KEY }}
         echo "$datasource_url"
