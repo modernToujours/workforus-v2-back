@@ -1,5 +1,6 @@
 package site.workforus.forus.employee.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class SignResponse {
 
     private List<Authority> roles = new ArrayList<>();
 
+    @JsonIgnore
     private String token;
 
     public SignResponse(Employee employee) {

@@ -18,8 +18,6 @@ import javax.annotation.PostConstruct;
 import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
-import java.security.Key;
-import java.security.PrivateKey;
 import java.util.Date;
 import java.util.List;
 
@@ -31,9 +29,7 @@ public class JWTProvider {
     private String salt;
 
     private SecretKey secretKey;
-
-    private final long exp = 1000L * 60 * 60;
-
+    
     private final UserDetailsServiceImpl userDetailsService;
 
     @PostConstruct
@@ -45,20 +41,16 @@ public class JWTProvider {
         Claims claims = Jwts.claims().setSubject(account);
         claims.put("roles", roles);
         Date now = new Date();
-        return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + exp))
-                .signWith(secretKey, SignatureAlgorithm.HS256)
-                .compact();
+        long exp = 1000L * 60 * 60;
+        return Jwts.builder().setClaims(claims).setIssuedAt(now).setExpiration(new Date(now.getTime() + exp)).signWith(secretKey, SignatureAlgorithm.HS256).compact();
     }
 
-    public Authentication getAuthentication(String token){
+    public Authentication getAuthentication(String token) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(this.getId(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
-    public String getId(String token){
+    public String getId(String token) {
         return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().getSubject();
     }
 
