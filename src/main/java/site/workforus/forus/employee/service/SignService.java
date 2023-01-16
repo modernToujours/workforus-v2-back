@@ -23,11 +23,11 @@ public class SignService {
     private final PasswordEncoder passwordEncoder;
     private final JWTProvider jwtProvider;
 
-    public SignResponse login(SignRequest request) throws Exception {
+    public SignResponse login(SignRequest request)  {
         Employee employee = employeeRepository.findById(request.getId())
                 .orElseThrow(()->new BadCredentialsException("잘못된 계정정보입니다."));
 
-        if(!passwordEncoder.matches(request.getPassword(), employee.getPassword())){
+        if(!passwordEncoder.matches(request.getPassword(), employee.getPassword())) {
             throw new BadCredentialsException("잘못된 계정정보입니다.");
         }
 
@@ -58,10 +58,4 @@ public class SignService {
         return true;
     }
 
-    public SignResponse getEmployee(String id) throws Exception {
-        Employee employee = employeeRepository.findById(id)
-                .orElseThrow(() -> new Exception("계정을 찾을 수 없습니다."));
-
-        return new SignResponse(employee);
-    }
 }

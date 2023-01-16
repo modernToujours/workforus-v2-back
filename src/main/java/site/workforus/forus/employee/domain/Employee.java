@@ -13,11 +13,15 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class Employee {
+
     @Id
     @Column(unique = true)
     private String id;
+
     private String name;
+
     private String password;
+
     @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Builder.Default
     private List<Authority> roles = new ArrayList<>();
@@ -26,5 +30,4 @@ public class Employee {
         this.roles = role;
         role.forEach(o -> o.setEmployee(this));
     }
-
 }

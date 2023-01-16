@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class CustomUserDetails implements UserDetails {
+
     private final Employee employee;
 
     public CustomUserDetails(Employee employee){
