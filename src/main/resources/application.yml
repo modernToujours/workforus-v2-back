@@ -40,7 +40,7 @@ spring:
   jpa:
     database: h2
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     generate-ddl: true
   datasource:
     url: jdbc:h2:mem:testdb;MODE=MariaDB;
@@ -53,4 +53,4 @@ spring:
 
 jwt:
   secret:
-    key: ${env.jwt_secret_key}
+    key: hellonicetomeetyouimmoerntoujoursthankyou
