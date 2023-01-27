@@ -2,7 +2,6 @@ package site.workforus.forus.employee.domain;
 
 import lombok.*;
 import site.workforus.forus.authority.domain.Authority;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.List;
 public class Employee {
 
     @Id
-    @Column(unique = true)
+    @Column(name = "EMPLOYEE_ID")
     private String id;
 
     private String name;
@@ -26,8 +25,8 @@ public class Employee {
     @Builder.Default
     private List<Authority> roles = new ArrayList<>();
 
-    public void setRoles(List<Authority> role) {
-        this.roles = role;
-        role.forEach(o -> o.setEmployee(this));
+    public void setRoles(List<Authority> roles) {
+        this.roles = roles;
+        roles.forEach(role -> role.setEmployee(this));
     }
 }
