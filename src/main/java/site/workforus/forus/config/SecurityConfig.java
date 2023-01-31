@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +19,7 @@ import site.workforus.forus.jwt.JWTProvider;
 
 import java.util.List;
 
+
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -25,6 +27,15 @@ public class SecurityConfig {
 
     private final JWTProvider jwtProvider;
 
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().antMatchers(
+                "/swagger-ui/**",
+                "/h2-console/**",
+                "/swagger-resources/**",
+                "/v3/api-docs/**"
+        );
+    }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
@@ -34,7 +45,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/register","/login").permitAll()
+                .antMatchers("/register/**","/login","/swagger-ui/*","/swagger-ui.html").permitAll()
                 .antMatchers("/**").hasRole("USER")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().denyAll()
@@ -53,6 +64,7 @@ public class SecurityConfig {
                     response.setContentType("text/html; charset=UTF-8");
                     response.getWriter().write("인증되지 않은 사용자입니다.");
                 });
+
 
         return http.build();
     }

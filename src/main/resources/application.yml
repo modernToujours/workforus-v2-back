@@ -16,6 +16,16 @@ spring:
     hibernate:
       ddl-auto: create
     generate-ddl: true
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    tagsSorter: alpha
+    operations-sorter: alpha
+    display-request-duration: true
+  packages-to-scan: site.workforus.forus
 #    defer-datasource-initialization: true
 
 #  sql:
