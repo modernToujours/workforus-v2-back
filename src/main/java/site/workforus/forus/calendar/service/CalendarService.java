@@ -4,13 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.workforus.forus.calendar.domain.Calendar;
+import site.workforus.forus.calendar.domain.CalendarShare;
 import site.workforus.forus.calendar.dto.CalendarRequest;
 import site.workforus.forus.calendar.dto.CalendarResponse;
 import site.workforus.forus.calendar.repository.CalendarRepository;
 import site.workforus.forus.calendar.repository.CalendarShareRepository;
 import site.workforus.forus.employee.domain.Employee;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -55,7 +58,16 @@ public class CalendarService {
                     .employee(employee)
                     .build();
 
-            calendarRepository.save(calendar);
+            Calendar newCalendar = calendarRepository.save(calendar);
+
+            ArrayList<String> sharers = request.getSharers();
+            if(!sharers.isEmpty()){
+                List<CalendarShare> calendarShares =sharers.stream()
+                        .map((sharer)->CalendarShare.builder().calendar(newCalendar).employeeId(sharer).build())
+                        .collect(Collectors.toList());
+                calendarShareRepository.saveAll(calendarShares);
+            }
+
         }catch (Exception e) {
             System.out.println(e.getMessage());
             throw new Exception("잘못된 요청 입니다.");

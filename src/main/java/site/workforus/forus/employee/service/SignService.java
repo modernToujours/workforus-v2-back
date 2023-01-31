@@ -6,6 +6,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.workforus.forus.authority.domain.Authority;
+import site.workforus.forus.calendar.domain.Calendar;
+import site.workforus.forus.calendar.repository.CalendarRepository;
 import site.workforus.forus.employee.domain.Employee;
 import site.workforus.forus.employee.dto.SignRequest;
 import site.workforus.forus.employee.dto.SignResponse;
@@ -20,6 +22,9 @@ import java.util.Collections;
 public class SignService {
 
     private final EmployeeRepository employeeRepository;
+
+    private final CalendarRepository calendarRepository;
+
     private final PasswordEncoder passwordEncoder;
     private final JWTProvider jwtProvider;
 
@@ -50,12 +55,25 @@ public class SignService {
 
             employee.setRoles(Collections.singletonList(Authority.builder().name("ROLE_USER").build()));
 
-            employeeRepository.save(employee);
+            Employee newEmployee = employeeRepository.save(employee);
+
+            Calendar calendar = Calendar.builder()
+                    .employee(newEmployee)
+                    .name("내 캘린더")
+                    .access("0")
+                    .build();
+
+            calendarRepository.save(calendar);
+
         }catch (Exception e){
             System.out.println(e.getMessage());
             throw new Exception("잘못된 요청입니다.");
         }
         return true;
+    }
+
+    public boolean checkIdDuplicate(String id) {
+        return employeeRepository.existsById(id);
     }
 
 }

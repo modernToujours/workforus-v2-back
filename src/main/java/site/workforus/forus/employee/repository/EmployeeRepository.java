@@ -17,4 +17,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
 
     Optional<List<Employee>> findByNameContaining(String keyword);
 
+    boolean existsById(String Id);
 }
