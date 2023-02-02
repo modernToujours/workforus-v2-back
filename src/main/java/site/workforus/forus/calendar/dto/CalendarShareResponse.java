@@ -1,19 +1,25 @@
 package site.workforus.forus.calendar.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import site.workforus.forus.calendar.domain.Calendar;
 import site.workforus.forus.calendar.domain.CalendarShare;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter
-@Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CalendarShareResponse {
 
-    private List<CalendarShare> calendarShares = new ArrayList<>();
+    private  Long id;
+
+    String employeeId;
+
+    String calendarOwnerId;
+
+    String calendarOwnerName;
+
+    Calendar calendar;
 }

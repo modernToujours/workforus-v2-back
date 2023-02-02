@@ -31,7 +31,7 @@ public class ScheduleController {
 
     @GetMapping
     public ResponseEntity<ScheduleResponse> getSchedules(@AuthenticationPrincipal CustomUserDetails userDetails, @RequestParam(required = false) Long calendarId) throws Exception {
-        String employeeId = userDetails.getUsername();
+        String employeeId = userDetails.getEmployee().getId();
         ScheduleResponse schedules = null;
         if (calendarId != null)
             schedules = scheduleService.getScheduleByCalendarId(calendarId);
