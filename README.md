@@ -6,6 +6,8 @@
  - [**개발환경**](#개발-환경)
  - [**설치하기**](#설치하기)
  - [**기능소개**](#기능-소개)
+ - [**API 스펙**](#api-스펙)
+ - [**기능소개**](#기능-소개)
  - [**배포**](#배포)
 
 ---
@@ -68,6 +70,14 @@
 ## **설치하기**  
 
 - [Wiki 링크](https://github.com/modernToujours/workforus-v2-front/wiki/%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0)
+
+<br>
+
+---
+
+## API 스펙
+
+- [Swagger 링크](https://api.workforus.site/swagger-ui/index.html)
 
 <br>
 
