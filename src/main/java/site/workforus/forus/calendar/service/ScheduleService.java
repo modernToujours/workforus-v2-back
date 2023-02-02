@@ -30,7 +30,7 @@ public class ScheduleService {
     public ScheduleResponse getSchedulesByEmployeeId(String employeeId) throws Exception {
         List<Schedule> schedules = scheduleRepository
                 .findSchedulesByEmployeeId(employeeId)
-                .orElseThrow(() -> new Exception("존재하지 않는 캘린더입니다."));
+                .orElseThrow(() -> new Exception("잘못된 요청입니다."));
 
         return ScheduleResponse.builder().schedules(schedules).build();
     }

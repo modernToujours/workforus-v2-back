@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import site.workforus.forus.calendar.domain.Calendar;
 import site.workforus.forus.calendar.domain.CalendarShare;
 import site.workforus.forus.calendar.domain.Schedule;
+import site.workforus.forus.calendar.dto.CalendarShareListResponse;
 import site.workforus.forus.calendar.dto.CalendarShareResponse;
 import site.workforus.forus.calendar.dto.ScheduleResponse;
 import site.workforus.forus.calendar.repository.CalendarRepository;
@@ -26,10 +27,23 @@ public class CalendarShareService {
     private final CalendarRepository calendarRepository;
     private final ScheduleRepository scheduleRepository;
 
-    public CalendarShareResponse getCalendarSharesByEmployee(Employee employee) throws Exception {
+    public CalendarShareListResponse getCalendarSharesByEmployee(Employee employee) throws Exception {
         List<CalendarShare> calendarShares = calendarShareRepository.findCalendarSharesByEmployeeId(employee.getId()).orElseThrow();
 
-        return new CalendarShareResponse(calendarShares);
+        List<CalendarShareResponse> calendarShareResponseList = calendarShares
+                .stream()
+                .map(share ->
+                        CalendarShareResponse
+                                .builder()
+                                .id(share.getId())
+                                .employeeId(share.getEmployeeId())
+                                .calendarOwnerId(share.getCalendar().getEmployee().getId())
+                                .calendarOwnerName(share.getCalendar().getEmployee().getName())
+                                .calendar(share.getCalendar())
+                                .build()
+                ).collect(Collectors.toList());
+
+        return new CalendarShareListResponse(calendarShareResponseList);
     }
 
     public ScheduleResponse getSharingSchedulesByEmployee(Employee employee) throws Exception {
