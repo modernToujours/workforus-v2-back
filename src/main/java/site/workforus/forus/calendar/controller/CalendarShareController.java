@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import site.workforus.forus.calendar.dto.CalendarShareRequest;
-import site.workforus.forus.calendar.dto.CalendarShareResponse;
+import site.workforus.forus.calendar.dto.CalendarShareListResponse;
 import site.workforus.forus.calendar.dto.ScheduleResponse;
 import site.workforus.forus.calendar.service.CalendarShareService;
 import site.workforus.forus.employee.domain.Employee;
@@ -27,7 +27,7 @@ public class CalendarShareController {
     }
 
     @GetMapping
-    public ResponseEntity<CalendarShareResponse> getCalendarShares(@AuthenticationPrincipal CustomUserDetails userDetails) throws Exception {
+    public ResponseEntity<CalendarShareListResponse> getCalendarShares(@AuthenticationPrincipal CustomUserDetails userDetails) throws Exception {
 
         Employee employee = userDetails.getEmployee();
 
